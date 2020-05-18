@@ -10,7 +10,7 @@ Vue.prototype.$axios = axios;
 Vue.config.productionTip = false;
 
 const firebaseConfig = {
-  //firebaseConfig details
+  //config
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
@@ -19,8 +19,7 @@ export const db = firebase.firestore();
 
 let app;
 
-firebase.auth().onAuthStateChanged(user => {
-  console.log(user);
+firebase.auth().onAuthStateChanged(() => {
   if (!app) {
     app = new Vue({
       router,

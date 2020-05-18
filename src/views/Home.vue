@@ -1,22 +1,22 @@
 <template>
-  <div>
-    <router-link to="/admin" v-if="isAdmin">
-      <h1>Admin Profile</h1>
-    </router-link>
-    <div v-if="recommended.length>0">
-      <h1>Recommended for you</h1>
-      <div class="grid-container">
-        <div class="max" v-for="serie in recommended" v-bind:key="serie.id">
-          <Card v-bind:serie="serie"></Card>
+  <div class="toTheLeft">
+      <router-link to="/admin" v-if="isAdmin">
+        <h1>Admin Profile</h1>
+      </router-link>
+      <div v-if="recommended.length>0">
+        <h1 class="morespace">Recommended for you</h1>
+        <div class="grid-container">
+          <div class="max" v-for="serie in recommended" v-bind:key="serie.id">
+            <Card v-bind:serie="serie"></Card>
+          </div>
         </div>
       </div>
-    </div>
-    <h1>Available on VueFlix</h1>
-    <div class="grid-container">
-      <div class="max" v-for="serie in series" v-bind:key="serie.id">
-        <Card v-bind:serie="serie"></Card>
+      <h1 class="morespace">Available on VueFlix</h1>
+      <div class="grid-container">
+        <div class="max" v-for="serie in series" v-bind:key="serie.id">
+          <Card v-bind:serie="serie" v-bind:typevalues="typevalues" v-bind:types="types"></Card>
+        </div>
       </div>
-    </div>
   </div>
 </template>
 
@@ -33,7 +33,9 @@ export default {
   data: () => ({
     series: [],
     recommended: [],
-    isAdmin: false
+    isAdmin: false,
+    typevalues: [],
+    types: ["comedy", "drama", "family", "fantasy"],
   }),
   mounted() {
     this.getCollection("series");
@@ -83,6 +85,7 @@ export default {
         snapshot.family,
         snapshot.fantasy
       ];
+      this.typevalues=typevalue;
       if (
         snapshot.comedy > 0 ||
         snapshot.drama > 0 ||
@@ -130,5 +133,13 @@ export default {
 }
 a {
   color: #42b983;
+}
+.morespace{
+  padding-top: 18px;
+  padding-bottom: 18px;
+}
+.toTheLeft{
+  max-width: 90%;
+  margin: auto;
 }
 </style>

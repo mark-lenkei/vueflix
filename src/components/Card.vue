@@ -12,7 +12,7 @@ import firebase from 'firebase';
 import { db } from '../main';
 
   export default {
-      props: ["serie"],
+      props: ["serie", "typevalues", "types"],
       methods: {
         increment(){
           let increment = firebase.firestore.FieldValue.increment(1);
@@ -49,6 +49,18 @@ import { db } from '../main';
     width:250px;
     height: 141px;
     margin-bottom: 25px;
+    transition: transform .5s;
+    transition-timing-function: ease;
+    background-color:#2c3e50;
+}
+
+.container:hover{
+  transform: scale(1.5);
+  z-index: 1;
+}
+
+.container:hover .type{
+  display:block;
 }
 
 .layer{
@@ -72,5 +84,6 @@ import { db } from '../main';
     bottom: 0px;
     left: 8px;
     color: #2c3e50;
+    display:none;
 }
 </style>
